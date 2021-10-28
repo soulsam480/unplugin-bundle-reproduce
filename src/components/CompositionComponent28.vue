@@ -1,0 +1,76 @@
+
+<template>
+  <div>
+    <p>{{ title }}</p>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id" @click="increment">
+        {{ todo.id }} - {{ todo.content }}
+      </li>
+    </ul>
+    <p>Count: {{ todoCount }} / {{ meta.totalCount }}</p>
+    <p>Active: {{ active ? 'yes' : 'no' }}</p>
+    <p>Clicks on todos: {{ clickCount }}</p>
+
+    <div>
+      {{ $route.path }}
+    </div>
+
+    <q-btn @click="loading.show()" label="Some button"> </q-btn>
+  </div>
+</template>
+
+<script lang="ts">
+import { useQuasar } from 'quasar';
+import { PropType, Ref, computed, defineComponent, toRef, ref } from 'vue';
+import { Todo, Meta } from './models';
+import { useRoute, useRouter } from 'vue-router';
+
+function useClickCount() {
+  const clickCount = ref(0);
+  function increment() {
+    clickCount.value += 1;
+    return clickCount.value;
+  }
+
+  return { clickCount, increment };
+}
+
+function useDisplayTodo(todos: Ref<Todo[]>) {
+  const todoCount = computed(() => todos.value.length);
+  return { todoCount };
+}
+
+export default defineComponent({
+  name: 'CompositionComponent28',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+    todos: {
+      type: Array as PropType<Todo[]>,
+      default: () => [],
+    },
+    meta: {
+      type: Object as PropType<Meta>,
+      required: true,
+    },
+    active: {
+      type: Boolean,
+    },
+  },
+  setup(props) {
+    const { loading, notify } = useQuasar();
+    const route = useRoute();
+    const router = useRouter();
+    return {
+      ...useClickCount(),
+      ...useDisplayTodo(toRef(props, 'todos')),
+      route,
+      router,
+      loading,
+      notify,
+    };
+  },
+});
+</script>
