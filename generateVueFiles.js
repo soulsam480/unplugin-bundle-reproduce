@@ -26,10 +26,8 @@ const fileData = (idx) => `
 </template>
 
 <script lang="ts">
-import { useQuasar } from 'quasar';
-import { PropType, Ref, computed, defineComponent, toRef, ref } from 'vue';
+import { PropType, Ref } from 'vue';
 import { Todo, Meta } from './models';
-import { useRoute, useRouter } from 'vue-router';
 
 function useClickCount() {
   const clickCount = ref(0);
@@ -126,7 +124,6 @@ const indexFileData = () => `
 <script lang="ts">
 import { Todo, Meta } from 'components/models';
 ${getImport()}
-import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'PageIndex',

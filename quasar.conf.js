@@ -75,25 +75,25 @@ module.exports = configure(function (ctx) {
         //
       },
       chainWebpack(chain) {
-        // chain.plugin('unplugin-auto-import').use(
-        //   AutoImportPlugin({
-        //     // targets to transform
-        //     include: [
-        //       /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        //       /\.vue$/,
-        //       /\.vue\?vue/, // .vue
-        //       /\.md$/, // .md
-        //     ],
-        //     // global imports to register
-        //     imports: [
-        //       // presets
-        //       'vue',
-        //       'vue-router',
-        //       'vuex',
-        //       'quasar',
-        //     ],
-        //   })
-        // );
+        chain.plugin('unplugin-auto-import').use(
+          AutoImportPlugin({
+            // targets to transform
+            include: [
+              /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+              /\.vue$/,
+              /\.vue\?vue/, // .vue
+              /\.md$/, // .md
+            ],
+            // global imports to register
+            imports: [
+              // presets
+              'vue',
+              'vue-router',
+              'vuex',
+              'quasar',
+            ],
+          })
+        );
       },
     },
 

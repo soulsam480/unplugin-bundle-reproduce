@@ -20,10 +20,8 @@
 </template>
 
 <script lang="ts">
-import { useQuasar } from 'quasar';
-import { PropType, Ref, computed, defineComponent, toRef, ref } from 'vue';
+import { PropType, Ref } from 'vue';
 import { Todo, Meta } from './models';
-import { useRoute, useRouter } from 'vue-router';
 
 function useClickCount() {
   const clickCount = ref(0);
